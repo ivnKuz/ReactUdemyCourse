@@ -66,9 +66,9 @@ function Menu() {
     <h2>Our Menu:</h2>
 
     {/* always need a boolean value, so it wont be rendered in DOM */}
-    {numPizzas > 0 && (<ul className='pizzas'>
+    {numPizzas > 0 ? (<ul className='pizzas'>
       {pizzas.map(pizza => <Pizza pizzaObj={pizza} key={pizza.name} />)}
-    </ul>)}
+    </ul>) : <p>We're still working on our menu. Please come back later :)</p>}
 
     {/* <Pizza name='Pizza spinaci' ingredients='Tomato, mozarella, ham, aragula, and burrata cheese' photoName='pizzas/spinaci.jpg' price={10} />
     <Pizza name='Pizza Funghi' ingredients='Tomato, mushrooms' photoName='pizzas/funghi.jpg' price={12} /> */}
@@ -90,7 +90,7 @@ function Pizza(props) {
 function Footer() {
   const hour = new Date().getHours()
   const openHour = 12;
-  const closeHour = 24;
+  const closeHour = 22;
   const isOpen = hour >= openHour && hour <= closeHour;
   console.log(isOpen);
   // hour >= openHour && hour <= closeHour ? alert("WE're currently open") : alert('Sorry we are closed.');
@@ -98,11 +98,11 @@ function Footer() {
   return (
 
     <footer className='footer'>
-      {isOpen && (
+      {isOpen ? (
         <div className='order'>
           <p>We're open untill {closeHour}:00. Come visit us or order online.</p>
           <button className='btn'>Order</button>
-        </div>)}
+        </div>) : <p>Currently closed. We're happy to welcome you between {openHour}:00 and {closeHour}:00.</p>}
     </footer>)
   // return React.createElement('footer', null, 'we\'re currently working');
 }
