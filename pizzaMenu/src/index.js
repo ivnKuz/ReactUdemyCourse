@@ -74,39 +74,46 @@ function Menu() {
     <Pizza name='Pizza Funghi' ingredients='Tomato, mushrooms' photoName='pizzas/funghi.jpg' price={12} /> */}
   </main>
 }
-function Pizza(props) {
-  console.log(props);
+function Pizza({ pizzaObj }) {
+  console.log(pizzaObj);
+
+  if (pizzaObj.soldOut) return null; //multiple returns on condition
+
   return (
     <li className='pizza'>
-      <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name}></img>
+      <img src={pizzaObj.photoName} alt={pizzaObj.name}></img>
       <div>
-        <h3>{props.pizzaObj.name}</h3>
-        <p>{props.pizzaObj.ingredients}</p>
-        <span>{props.pizzaObj.price}</span>
+        <h3>{pizzaObj.name}</h3>
+        <p>{pizzaObj.ingredients}</p>
+        <span>{pizzaObj.price}</span>
       </div>
     </li>);
 }
 
 function Footer() {
   const hour = new Date().getHours()
-  const openHour = 12;
-  const closeHour = 22;
+  const openHour = 1;
+  const closeHour = 4;
   const isOpen = hour >= openHour && hour <= closeHour;
   console.log(isOpen);
   // hour >= openHour && hour <= closeHour ? alert("WE're currently open") : alert('Sorry we are closed.');
 
+  // if (!isOpen) return (<p>Currently closed. We're happy to welcome you between {openHour}:00 and {closeHour}:00.</p>) //multiple returns
   return (
-
     <footer className='footer'>
-      {isOpen ? (
-        <div className='order'>
-          <p>We're open untill {closeHour}:00. Come visit us or order online.</p>
-          <button className='btn'>Order</button>
-        </div>) : <p>Currently closed. We're happy to welcome you between {openHour}:00 and {closeHour}:00.</p>}
+      {isOpen ? (<Order closeHour={closeHour} openHour={openHour} />) : (<p>Currently closed. We're happy to welcome you between {openHour}:00 and {closeHour}:00.</p>)}
     </footer>)
   // return React.createElement('footer', null, 'we\'re currently working');
 }
 
+//desctructured props should have similar names as attributes props we're passing
+function Order({ closeHour, openHour }) {
+  return (
+    <div className='order'>
+      <p>We're open from {openHour}:00 to {closeHour}:00. Come visit us or order online.</p>
+      <button className='btn'>Order</button>
+    </div>)
+}
 
 
 
