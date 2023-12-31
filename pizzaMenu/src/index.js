@@ -65,10 +65,16 @@ function Menu() {
   return <main className='menu'>
     <h2>Our Menu:</h2>
 
+
     {/* always need a boolean value, so it wont be rendered in DOM */}
-    {numPizzas > 0 ? (<ul className='pizzas'>
-      {pizzas.map(pizza => <Pizza pizzaObj={pizza} key={pizza.name} />)}
-    </ul>) : <p>We're still working on our menu. Please come back later :)</p>}
+    {numPizzas > 0 ? (
+      // this is a react fragment, used when you need to return two or maybe more elements, sometimes require a key like this <React.Fragment key={}> </React.Fragment>
+      <>
+        <p>Authentic Italian cuisine. 6 creative dishes to choose from. All from our stone oven, all organic, all</p>
+        <ul className='pizzas'>
+          {pizzas.map(pizza => <Pizza pizzaObj={pizza} key={pizza.name} />)}
+        </ul>
+      </>) : <p>We're still working on our menu. Please come back later :)</p>}
 
     {/* <Pizza name='Pizza spinaci' ingredients='Tomato, mozarella, ham, aragula, and burrata cheese' photoName='pizzas/spinaci.jpg' price={10} />
     <Pizza name='Pizza Funghi' ingredients='Tomato, mushrooms' photoName='pizzas/funghi.jpg' price={12} /> */}
