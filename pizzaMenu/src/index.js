@@ -48,7 +48,6 @@ const pizzaData = [
 
 function App() {
   return <div className='container'>
-    <h1>Hello ruct!!!!</h1>
     <Header />
     <Menu />
     <Footer />
@@ -83,15 +82,15 @@ function Menu() {
 function Pizza({ pizzaObj }) {
   console.log(pizzaObj);
 
-  if (pizzaObj.soldOut) return null; //multiple returns on condition
+  // if (pizzaObj.soldOut) return null; //multiple returns on condition
 
   return (
-    <li className='pizza'>
+    <li className={`pizza ${pizzaObj.soldOut ? 'sold-out' : ''}`}>
       <img src={pizzaObj.photoName} alt={pizzaObj.name}></img>
       <div>
         <h3>{pizzaObj.name}</h3>
         <p>{pizzaObj.ingredients}</p>
-        <span>{pizzaObj.price}</span>
+        <span>{pizzaObj.soldOut ? 'Sold out' : pizzaObj.price}</span>
       </div>
     </li>);
 }
